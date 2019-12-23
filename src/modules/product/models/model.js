@@ -90,6 +90,7 @@ var ProductSchema = new Schema({
     }
   ],
   parent_id: String,
+  menu_order: Number,
   created: {
     type: Date,
     default: Date.now

@@ -16,6 +16,7 @@ describe('Product CRUD routes tests', function () {
 
     before(function (done) {
         mockup = {
+            sku: 'sku',
             name: 'name'
         };
         credentials = {

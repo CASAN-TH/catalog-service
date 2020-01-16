@@ -6,7 +6,8 @@ var request = require('supertest'),
     jwt = require('jsonwebtoken'),
     mongoose = require('mongoose'),
     app = require('../../../config/express'),
-    Home = mongoose.model('Home');
+    Home = mongoose.model('Home'),
+    Product = mongoose.model('Product');
 
 var credentials,
     token,
@@ -39,37 +40,7 @@ describe('Home CRUD routes tests', function () {
             "blocks": [
                 {
                     "name": "ห้องนอน",
-                    "background_img": "https://res.cloudinary.com/hml20oe33/image/upload/v1576748337/catalog/S__20217883_rf1cco.jpg",
-                    "products": [
-                        {
-                            "name": "Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB",
-                            "image": "https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg",
-                            "discount": "22% off",
-                            "price": {
-                                "amount": "12,999.00",
-                                "currency": "฿"
-                            },
-                            "installment": {
-                                "amount": "785.77",
-                                "period": "x 18mo",
-                                "currency": "฿"
-                            }
-                        },
-                        {
-                            "name": "Vivo v10 Pro Crystal Sky RAM 8 GB ROM 128 GB",
-                            "image": "https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/1_k5dfsy.jpg",
-                            "discount": "22% off",
-                            "price": {
-                                "amount": "12,999.00",
-                                "currency": "฿"
-                            },
-                            "installment": {
-                                "amount": "785.77",
-                                "period": "x 18mo",
-                                "currency": "฿"
-                            }
-                        }
-                    ]
+                    "background_img": "https://res.cloudinary.com/hml20oe33/image/upload/v1576748337/catalog/S__20217883_rf1cco.jpg"
                 },
                 {
                     "name": "ห้องนอนเด็ก",
@@ -105,9 +76,34 @@ describe('Home CRUD routes tests', function () {
             });
     });
 
-    it('should be Home get by id', function (done) {
+    xit('should be Home get by id', function (done) {
 
-        request(app)
+        var product1 = new Product({
+            "sku": 'sku',
+            "name": 'Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB',
+            "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
+            "sale_price_percentage": "50%",
+            "sale_price": {
+                "price": 5000,
+                "currency": "฿"
+            },
+            "sale_price_text": "฿5,000",
+            "regular_price": {
+                "price": 10000,
+                "currency": "฿"
+            },
+            "regular_price_text": "฿10,000",
+            "installment": {
+                "price": 1000,
+                "period": 10,
+                "currency": "฿"
+            },
+            "installment_price_text": "฿1,000",
+            "categorys": ["bedroom", "restroom"]
+        })
+
+        product1.save(function (err, product) {
+            request(app)
             .post('/api/homes')
             .set('Authorization', 'Bearer ' + token)
             .send(mockup)
@@ -117,6 +113,7 @@ describe('Home CRUD routes tests', function () {
                     return done(err);
                 }
                 var resp = res.body;
+                console.log(product)
                 request(app)
                     .get('/api/homes/' + resp.data._id)
                     .set('Authorization', 'Bearer ' + token)
@@ -126,11 +123,23 @@ describe('Home CRUD routes tests', function () {
                             return done(err);
                         }
                         var resp = res.body;
-                        // assert.equal(resp.status, 200);
-                        // assert.equal(resp.data.name, mockup.name);
+                        assert.equal(resp.status, 200);
+                        assert.equal(resp.data.slides[0].background_color, mockup.slides[0].background_color);
+                        assert.equal(resp.data.slides[0].image, mockup.slides[0].image);
+                        assert.equal(resp.data.slides[1].background_color, mockup.slides[1].background_color);
+                        assert.equal(resp.data.slides[1].image, mockup.slides[1].image);
+                        assert.equal(resp.data.menus[0].icon_menu, mockup.menus[0].icon_menu);
+                        assert.equal(resp.data.menus[0].name_menu, mockup.menus[0].name_menu);
+                        assert.equal(resp.data.menus[1].icon_menu, mockup.menus[1].icon_menu);
+                        assert.equal(resp.data.menus[1].name_menu, mockup.menus[1].name_menu);
+                        assert.equal(resp.data.blocks[0].name, mockup.blocks[0].name);
+                        assert.equal(resp.data.blocks[0].background_img, mockup.blocks[0].background_img);
+                        assert.equal(resp.data.blocks[1].name, mockup.blocks[1].name);
+                        assert.equal(resp.data.blocks[1].background_img, mockup.blocks[1].background_img);
                         done();
                     });
             });
+        })
 
     });
 
@@ -145,8 +154,19 @@ describe('Home CRUD routes tests', function () {
                     return done(err);
                 }
                 var resp = res.body;
-                // console.log(resp.data.blocks[0].products)
-                // assert.equal(resp.data.name, mockup.name);
+                assert.equal(resp.status, 200);
+                assert.equal(resp.data.slides[0].background_color, mockup.slides[0].background_color);
+                assert.equal(resp.data.slides[0].image, mockup.slides[0].image);
+                assert.equal(resp.data.slides[1].background_color, mockup.slides[1].background_color);
+                assert.equal(resp.data.slides[1].image, mockup.slides[1].image);
+                assert.equal(resp.data.menus[0].icon_menu, mockup.menus[0].icon_menu);
+                assert.equal(resp.data.menus[0].name_menu, mockup.menus[0].name_menu);
+                assert.equal(resp.data.menus[1].icon_menu, mockup.menus[1].icon_menu);
+                assert.equal(resp.data.menus[1].name_menu, mockup.menus[1].name_menu);
+                assert.equal(resp.data.blocks[0].name, mockup.blocks[0].name);
+                assert.equal(resp.data.blocks[0].background_img, mockup.blocks[0].background_img);
+                assert.equal(resp.data.blocks[1].name, mockup.blocks[1].name);
+                assert.equal(resp.data.blocks[1].background_img, mockup.blocks[1].background_img);
                 done();
             });
     });
@@ -164,7 +184,16 @@ describe('Home CRUD routes tests', function () {
                 }
                 var resp = res.body;
                 var update = {
-                    name: 'name update'
+                    "slides": [
+                        {
+                            "background_color": "rgb(217, 212, 2111111)",
+                            "image": "update.jpg"
+                        },
+                        {
+                            "background_color": "rgb(154, 144, 135222222);",
+                            "image": "update.jpg"
+                        }
+                    ]
                 }
                 request(app)
                     .put('/api/homes/' + resp.data._id)
@@ -176,7 +205,19 @@ describe('Home CRUD routes tests', function () {
                             return done(err);
                         }
                         var resp = res.body;
-                        // assert.equal(resp.data.name, update.name);
+                        assert.equal(resp.status, 200);
+                        assert.equal(resp.data.slides[0].background_color, update.slides[0].background_color);
+                        assert.equal(resp.data.slides[0].image, update.slides[0].image);
+                        assert.equal(resp.data.slides[1].background_color, update.slides[1].background_color);
+                        assert.equal(resp.data.slides[1].image, update.slides[1].image);
+                        assert.equal(resp.data.menus[0].icon_menu, mockup.menus[0].icon_menu);
+                        assert.equal(resp.data.menus[0].name_menu, mockup.menus[0].name_menu);
+                        assert.equal(resp.data.menus[1].icon_menu, mockup.menus[1].icon_menu);
+                        assert.equal(resp.data.menus[1].name_menu, mockup.menus[1].name_menu);
+                        assert.equal(resp.data.blocks[0].name, mockup.blocks[0].name);
+                        assert.equal(resp.data.blocks[0].background_img, mockup.blocks[0].background_img);
+                        assert.equal(resp.data.blocks[1].name, mockup.blocks[1].name);
+                        assert.equal(resp.data.blocks[1].background_img, mockup.blocks[1].background_img);
                         done();
                     });
             });
@@ -283,6 +324,7 @@ describe('Home CRUD routes tests', function () {
 
     afterEach(function (done) {
         Home.remove().exec(done);
+        // Product.remove().exec(done);
     });
 
 });

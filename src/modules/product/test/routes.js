@@ -16,8 +16,26 @@ describe('Product CRUD routes tests', function () {
 
     before(function (done) {
         mockup = {
-            sku: 'sku',
-            name: 'name'
+            "sku": 'sku',
+            "name": 'Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB',
+            "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
+            "sale_price_percentage": "50%",
+            "sale_price": {
+                "price": 5000,
+                "currency": "฿"
+            },
+            "sale_price_text": "฿5,000",
+            "regular_price": {
+                "price": 10000,
+                "currency": "฿"
+            },
+            "regular_price_text": "฿10,000",
+            "installment": {
+                "price": 1000,
+                "period": 10,
+                "currency": "฿"
+            },
+            "installment_price_text": "฿1,000"
         };
         credentials = {
             username: 'username',
@@ -33,18 +51,18 @@ describe('Product CRUD routes tests', function () {
         done();
     });
 
-    it('should be Product get use token', (done)=>{
+    it('should be Product get use token', (done) => {
         request(app)
-        .get('/api/products')
-        .set('Authorization', 'Bearer ' + token)
-        .expect(200)
-        .end((err, res)=>{
-            if (err) {
-                return done(err);
-            }
-            var resp = res.body;
-            done();
-        });
+            .get('/api/products')
+            .set('Authorization', 'Bearer ' + token)
+            .expect(200)
+            .end((err, res) => {
+                if (err) {
+                    return done(err);
+                }
+                var resp = res.body;
+                done();
+            });
     });
 
     it('should be Product get by id', function (done) {
@@ -69,14 +87,27 @@ describe('Product CRUD routes tests', function () {
                         }
                         var resp = res.body;
                         assert.equal(resp.status, 200);
+                        assert.equal(resp.data.sku, mockup.sku);
                         assert.equal(resp.data.name, mockup.name);
+                        assert.equal(resp.data.images[0], mockup.images[0]);
+                        assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
+                        assert.equal(resp.data.sale_price.price, mockup.sale_price.price);
+                        assert.equal(resp.data.sale_price.currency, mockup.sale_price.currency);
+                        assert.equal(resp.data.sale_price_text, mockup.sale_price_text);
+                        assert.equal(resp.data.regular_price.price, mockup.regular_price.price);
+                        assert.equal(resp.data.regular_price.currency, mockup.regular_price.currency);
+                        assert.equal(resp.data.regular_price_text, mockup.regular_price_text);
+                        assert.equal(resp.data.installment.price, mockup.installment.price);
+                        assert.equal(resp.data.installment.period, mockup.installment.period);
+                        assert.equal(resp.data.installment.currency, mockup.installment.currency);
+                        assert.equal(resp.data.installment_price_text, mockup.installment_price_text);
                         done();
                     });
             });
 
     });
 
-    it('should be Product post use token', (done)=>{
+    it('should be Product post use token', (done) => {
         request(app)
             .post('/api/products')
             .set('Authorization', 'Bearer ' + token)
@@ -87,7 +118,21 @@ describe('Product CRUD routes tests', function () {
                     return done(err);
                 }
                 var resp = res.body;
+                assert.equal(resp.status, 200);
+                assert.equal(resp.data.sku, mockup.sku);
                 assert.equal(resp.data.name, mockup.name);
+                assert.equal(resp.data.images[0], mockup.images[0]);
+                assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
+                assert.equal(resp.data.sale_price.price, mockup.sale_price.price);
+                assert.equal(resp.data.sale_price.currency, mockup.sale_price.currency);
+                assert.equal(resp.data.sale_price_text, mockup.sale_price_text);
+                assert.equal(resp.data.regular_price.price, mockup.regular_price.price);
+                assert.equal(resp.data.regular_price.currency, mockup.regular_price.currency);
+                assert.equal(resp.data.regular_price_text, mockup.regular_price_text);
+                assert.equal(resp.data.installment.price, mockup.installment.price);
+                assert.equal(resp.data.installment.period, mockup.installment.period);
+                assert.equal(resp.data.installment.currency, mockup.installment.currency);
+                assert.equal(resp.data.installment_price_text, mockup.installment_price_text);
                 done();
             });
     });
@@ -117,7 +162,21 @@ describe('Product CRUD routes tests', function () {
                             return done(err);
                         }
                         var resp = res.body;
+                        assert.equal(resp.status, 200);
+                        assert.equal(resp.data.sku, mockup.sku);
                         assert.equal(resp.data.name, update.name);
+                        assert.equal(resp.data.images[0], mockup.images[0]);
+                        assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
+                        assert.equal(resp.data.sale_price.price, mockup.sale_price.price);
+                        assert.equal(resp.data.sale_price.currency, mockup.sale_price.currency);
+                        assert.equal(resp.data.sale_price_text, mockup.sale_price_text);
+                        assert.equal(resp.data.regular_price.price, mockup.regular_price.price);
+                        assert.equal(resp.data.regular_price.currency, mockup.regular_price.currency);
+                        assert.equal(resp.data.regular_price_text, mockup.regular_price_text);
+                        assert.equal(resp.data.installment.price, mockup.installment.price);
+                        assert.equal(resp.data.installment.period, mockup.installment.period);
+                        assert.equal(resp.data.installment.currency, mockup.installment.currency);
+                        assert.equal(resp.data.installment_price_text, mockup.installment_price_text);
                         done();
                     });
             });
@@ -145,15 +204,15 @@ describe('Product CRUD routes tests', function () {
 
     });
 
-    it('should be product get not use token', (done)=>{
+    it('should be product get not use token', (done) => {
         request(app)
-        .get('/api/products')
-        .expect(403)
-        .expect({
-            status: 403,
-            message: 'User is not authorized'
-        })
-        .end(done);
+            .get('/api/products')
+            .expect(403)
+            .expect({
+                status: 403,
+                message: 'User is not authorized'
+            })
+            .end(done);
     });
 
     it('should be product post not use token', function (done) {

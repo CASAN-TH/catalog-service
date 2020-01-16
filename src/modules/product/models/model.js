@@ -17,6 +17,50 @@ var ProductSchema = new Schema({
     type: String,
     required: "Please fill a Product name"
   },
+  images: [String],
+  sale_price_percentage: String,
+  sale_price: {
+    type: {
+      price: {
+        type: Number
+      },
+      currency: {
+        type: String
+      }
+    }
+  },
+  sale_price_text: {
+    type: String
+  },
+  regular_price: {
+    type: {
+      price: {
+        type: Number
+      },
+      currency: {
+        type: String
+      }
+    }
+  },
+  regular_price_text: {
+    type: String
+  },
+  installment: {
+    type: {
+      price: {
+        type: Number
+      },
+      period: {
+        type: Number
+      },
+      currency: {
+        type: String
+      }
+    }
+  },
+  installment_price_text: {
+    type: String
+  },
   status: {
     type: String,
     enum: ["published", "draft", "private"],
@@ -67,8 +111,6 @@ var ProductSchema = new Schema({
     default: true
   },
   purchase_note: String,
-  sale_price: Number,
-  regular_price: Number,
   categorys: [String],
   shipping_class: String,
   attributes: [
@@ -80,7 +122,6 @@ var ProductSchema = new Schema({
       global: Boolean
     }
   ],
-  images: [String],
   downloads: [
     {
       name: String,

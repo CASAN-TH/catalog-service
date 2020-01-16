@@ -33,6 +33,9 @@ var CategorySchema = new Schema({
     type: Number,
     default: 0
   },
+  products: {
+    type: []
+  },
   created: {
     type: Date,
     default: Date.now

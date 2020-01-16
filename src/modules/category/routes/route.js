@@ -6,7 +6,7 @@ module.exports = function (app) {
     var url = '/api/categories';
     var urlWithParam = '/api/categories/:categoryId';
     app.route(url)
-        .get(controller.getList,controller.cookingData, controller.resData);
+        .get(controller.getList, controller.cookingData, controller.resData);
 
 
     app.route(url).all(policy.isAllowed)
@@ -16,6 +16,14 @@ module.exports = function (app) {
         .get(controller.read)
         .put(controller.update)
         .delete(controller.delete);
+
+    app.route('/api/cateproducthome')
+        .get(
+            controller.getList,
+            controller.getProduct,
+            controller.mixData,
+            controller.resData
+        )
 
 
     app.param('categoryId', controller.getByID);

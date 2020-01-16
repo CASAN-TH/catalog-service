@@ -1,13 +1,14 @@
 'use strict';
 var mongoose = require('mongoose'),
     model = require('../models/model'),
+    productModel = require('../../product/models/model'),
     mq = require('../../core/controllers/rabbitmq'),
     Category = mongoose.model('Category'),
+    Product = mongoose.model('Product'),
     errorHandler = require('../../core/controllers/errors.server.controller'),
     _ = require('lodash');
 
 exports.getList = function (req, res, next) {
-
     Category.find(function (err, datas) {
         if (err) {
             return res.status(400).send({
@@ -15,20 +16,61 @@ exports.getList = function (req, res, next) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            // res.jsonp({
-            //     status: 200,
-            //     data: datas
-            // });
             req.CategoryData = datas;
             next();
         };
     });
 };
 
+exports.getProduct = function (req, res, next) {
+
+    Product.find(function (err,productDatas) {
+        if (err) {
+            return res.status(400).send({
+                status: 400,
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            req.ProductData = productDatas
+            next();
+        };
+    })
+
+};
+
+exports.mixData = function (req, res, next) {
+
+    var categoryData = req.CategoryData;
+    var productData = req.ProductData;
+
+    for (let i = 0; i < categoryData.length; i++) {
+        const cateData = categoryData[i];
+        // console.log(cateData._id)
+        // console.log(cateData)
+        var products = []
+
+        for (let j = 0; j < productData.length; j++) {
+            const prodData = productData[j];
+            
+            for (let j2 = 0; j2 < prodData.categorys.length; j2++) {
+                const cateId = prodData.categorys[j2];
+                // console.log(cateId)
+                if(cateId == cateData._id){
+                    products.push(prodData)
+                }
+            };
+        };
+        cateData.products = products
+        console.log(cateData)
+    };
+
+    next()
+}
+
 exports.resData = function (req, res) {
     res.jsonp({
         status: 200,
-        data: req.cookingData
+        data: req.cookingData ? req.cookingData : []
     });
 }
 

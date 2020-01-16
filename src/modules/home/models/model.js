@@ -5,9 +5,79 @@ var Schema = mongoose.Schema;
 
 
 var HomeSchema = new Schema({
-    name: {
-        type: String,
-        required: 'Please fill a Home name',
+    slides: {
+        type: [
+            {
+                background_color: {
+                    type: String
+                },
+                image: {
+                    type: String
+                }
+            }
+        ]
+    },
+    menus: {
+        type: [
+            {
+                icon_menu: {
+                    type: String
+                },
+                name_menu: {
+                    type: String
+                }
+            }
+        ]
+    },
+    blocks: {
+        type: [
+            {
+                name: {
+                    type: String
+                },
+                background_img: {
+                    type: String
+                },
+                products: {
+                    type: [
+                        {
+                            name: {
+                                type: String
+                            },
+                            image: {
+                                type: String
+                            },
+                            discount: {
+                                type: String
+                            },
+                            price: {
+                                type: {
+                                    amount: {
+                                        type: String
+                                    },
+                                    currency: {
+                                        type: String
+                                    }
+                                }
+                            },
+                            installment: {
+                                type: {
+                                    amount: {
+                                        type: String
+                                    },
+                                    period: {
+                                        type: String
+                                    },
+                                    currency: {
+                                        type: String
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
     },
     created: {
         type: Date,

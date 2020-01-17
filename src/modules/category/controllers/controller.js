@@ -48,7 +48,8 @@ exports.mixData = function (req, res, next) {
     for (let i = 0; i < categoryData.length; i++) {
         const cateData = categoryData[i];
         // console.log(cateData._id)
-        var products = []
+        var data = {};
+        var products = [];
 
         for (let j = 0; j < productData.length; j++) {
             const prodData = productData[j];
@@ -71,10 +72,13 @@ exports.mixData = function (req, res, next) {
         // limit array ของ product แค่ 4
         products.length = Math.min(products.length, 4)
         // console.log(products)
-        cateData.products = products
+        
+        data.products = products;
+        data.name = cateData.name;
+        data.image = cateData.image;
 
-        // console.log(cateData)
-        mixedData.push(cateData)
+        // console.log(data)
+        mixedData.push(data)
     };
     // console.log(mixedData)
     req.cookingData = mixedData

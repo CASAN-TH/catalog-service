@@ -9,6 +9,9 @@ var ProductSchema = new Schema({
     enum: ["simple", "variable", "grouped", "variation", "virtual"],
     default: "simple"
   },
+  shop_id: {
+    type: String
+  },
   sku: {
     type: String,
     required: "Please fill a Product SKU"

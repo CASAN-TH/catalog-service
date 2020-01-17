@@ -17,6 +17,7 @@ describe('Product CRUD routes tests', function () {
     before(function (done) {
         mockup = {
             "sku": 'sku',
+            "shop_id": 'shop001',
             "name": 'Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB',
             "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
             "sale_price_percentage": "50%",
@@ -89,6 +90,7 @@ describe('Product CRUD routes tests', function () {
                         var resp = res.body;
                         assert.equal(resp.status, 200);
                         assert.equal(resp.data.sku, mockup.sku);
+                        assert.equal(resp.data.shop_id, mockup.shop_id);
                         assert.equal(resp.data.name, mockup.name);
                         assert.equal(resp.data.images[0], mockup.images[0]);
                         assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
@@ -121,6 +123,7 @@ describe('Product CRUD routes tests', function () {
                 var resp = res.body;
                 assert.equal(resp.status, 200);
                 assert.equal(resp.data.sku, mockup.sku);
+                assert.equal(resp.data.shop_id, mockup.shop_id);
                 assert.equal(resp.data.name, mockup.name);
                 assert.equal(resp.data.images[0], mockup.images[0]);
                 assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
@@ -165,6 +168,7 @@ describe('Product CRUD routes tests', function () {
                         var resp = res.body;
                         assert.equal(resp.status, 200);
                         assert.equal(resp.data.sku, mockup.sku);
+                        assert.equal(resp.data.shop_id, mockup.shop_id);
                         assert.equal(resp.data.name, update.name);
                         assert.equal(resp.data.images[0], mockup.images[0]);
                         assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);

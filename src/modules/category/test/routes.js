@@ -86,44 +86,64 @@ describe('Category CRUD routes tests', function () {
 
                 var product1 = new Product({
                     "sku": 'sku',
-                    "name": 'Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB',
+                    "name": 'Product test 1',
                     "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
-                    "sale_price_percentage": "50%",
-                    "sale_price": {
-                        "price": 5000,
-                        "currency": "฿"
-                    },
-                    "sale_price_text": "฿5,000",
-                    "regular_price": {
-                        "price": 10000,
-                        "currency": "฿"
-                    },
-                    "regular_price_text": "฿10,000",
-                    "installment": {
-                        "price": 1000,
-                        "period": 10,
-                        "currency": "฿"
-                    },
-                    "installment_price_text": "฿1,000",
                     "categorys": [cate1._id, cate2._id]
                 });
 
-                product1.save(function (err, productData1) {
+                var product2 = new Product({
+                    "sku": 'sku',
+                    "name": 'Product test 2',
+                    "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
+                    "categorys": [cate1._id, cate2._id]
+                });
 
-                    request(app)
-                        .get('/api/cateproducthome')
-                        .set('Authorization', 'Bearer ' + token)
-                        .expect(200)
-                        .end(function (err, res) {
-                            if (err) {
-                                return done(err);
-                            }
-                            var resp = res.body;
-                            console.log('==========testcase==============')
-                            console.log(resp.data)
-                            done();
+                var product3 = new Product({
+                    "sku": 'sku',
+                    "name": 'Product test 3',
+                    "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
+                    "categorys": [cate1._id]
+                });
+
+                var product4 = new Product({
+                    "sku": 'sku',
+                    "name": 'Product test 4',
+                    "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
+                    "categorys": [cate1._id]
+                });
+
+                var product5 = new Product({
+                    "sku": 'sku',
+                    "name": 'Product test 5',
+                    "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
+                    "categorys": [cate1._id, cate2._id]
+                });
+
+                product1.save(function (err, data1) {
+                    product2.save(function (err, data2) {
+                        product3.save(function (err, data3) {
+                            product4.save(function (err, data4) {
+                                product5.save(function (err, data5) {
+
+                                    request(app)
+                                        .get('/api/cateproducthome')
+                                        .set('Authorization', 'Bearer ' + token)
+                                        .expect(200)
+                                        .end(function (err, res) {
+                                            if (err) {
+                                                return done(err);
+                                            }
+                                            var resp = res.body;
+                                            assert.equal(resp.data.length, 2);
+                                            assert.equal(resp.data[0].products.length, 4);
+                                            assert.equal(resp.data[1].products.length, 3);
+                                            done();
+                                        });
+
+                                });
+                            });
                         });
-
+                    });
                 });
             });
         });

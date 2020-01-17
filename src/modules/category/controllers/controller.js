@@ -24,7 +24,7 @@ exports.getList = function (req, res, next) {
 
 exports.getProduct = function (req, res, next) {
 
-    Product.find(function (err,productDatas) {
+    Product.find(function (err, productDatas) {
         if (err) {
             return res.status(400).send({
                 status: 400,
@@ -43,27 +43,41 @@ exports.mixData = function (req, res, next) {
     var categoryData = req.CategoryData;
     var productData = req.ProductData;
 
+    var mixedData = [];
+
     for (let i = 0; i < categoryData.length; i++) {
         const cateData = categoryData[i];
         // console.log(cateData._id)
-        // console.log(cateData)
         var products = []
 
         for (let j = 0; j < productData.length; j++) {
             const prodData = productData[j];
-            
+
             for (let j2 = 0; j2 < prodData.categorys.length; j2++) {
                 const cateId = prodData.categorys[j2];
                 // console.log(cateId)
-                if(cateId == cateData._id){
+                if (cateId == cateData._id) {
                     products.push(prodData)
                 }
             };
         };
-        cateData.products = products
-        console.log(cateData)
-    };
 
+        // sort จากใหม่ ไป เก่า
+        products.sort(function (a, b) {
+            return new Date(b.created) - new Date(a.created);
+        });
+        // console.log(products);
+
+        // limit array ของ product แค่ 4
+        products.length = Math.min(products.length, 4)
+        // console.log(products)
+        cateData.products = products
+
+        // console.log(cateData)
+        mixedData.push(cateData)
+    };
+    // console.log(mixedData)
+    req.cookingData = mixedData
     next()
 }
 

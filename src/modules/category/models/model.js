@@ -19,7 +19,20 @@ var CategorySchema = new Schema({
       "https://res.cloudinary.com/dxpoicnkq/image/upload/v1576564450/image_ukbpnl.svg"
   },
   cover_image: {
-    type: [String]
+    type: [
+      {
+        image: {
+          type: String
+        },
+        type_promotion: {
+          type: String,
+          enum: ['page', 'web']
+        },
+        link_promotion: {
+          type: String
+        }
+      }
+    ]
   },
   is_active: {
     type: Boolean,

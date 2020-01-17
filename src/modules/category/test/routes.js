@@ -36,9 +36,9 @@ describe('Category CRUD routes tests', function () {
     it('should be Category get use token', (done) => {
         var cate1 = new Category({
             "name": "ผลิตภัณฑ์เพื่อความงาม",
-            "cover_image": [
-                "https://pub.thisshop.com/shop/block/20191212/17774641_1576135900473.png"
-            ]
+            "cover_image": [{
+                "image": "https://pub.thisshop.com/shop/block/20191212/17774641_1576135900473.png"
+            }]
         });
         cate1.save((err, data) => {
             // console.log(data)
@@ -60,6 +60,7 @@ describe('Category CRUD routes tests', function () {
                         }
 
                         var resp = res.body;
+                        // console.log(resp.data)
                         assert.equal(resp.data.length, 1);
                         assert.equal(resp.data[0].items.length, 1);
                         assert.equal(resp.data[0].items[0].name, 'ผิวกาย (Body & Personal care)');

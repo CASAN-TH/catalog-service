@@ -64,6 +64,12 @@ var ProductSchema = new Schema({
   installment_price_text: {
     type: String
   },
+  down_payments: {
+    type: [Number]
+  },
+  periods: {
+    type: [Number]
+  },
   status: {
     type: String,
     enum: ["published", "draft", "private"],

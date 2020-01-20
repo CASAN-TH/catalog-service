@@ -37,6 +37,8 @@ describe('Product CRUD routes tests', function () {
                 "currency": "฿"
             },
             "installment_price_text": "฿1,000",
+            "down_payments": [20, 30, 40, 50],
+            "periods": [3, 6, 9, 12, 18],
             "categorys": ["bedroom", "restroom"]
         };
         credentials = {

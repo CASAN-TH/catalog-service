@@ -20,23 +20,25 @@ describe('Product CRUD routes tests', function () {
             "shop_id": 'shop001',
             "name": 'Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB',
             "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
-            "sale_price_percentage": "50%",
+            "sale_price_percentage": 50,
+            "sale_avaliable": true,
             "sale_price": {
                 "price": 5000,
                 "currency": "฿"
             },
-            "sale_price_text": "฿5,000",
             "regular_price": {
                 "price": 10000,
                 "currency": "฿"
             },
-            "regular_price_text": "฿10,000",
-            "installment": {
+            "down_payment": {
                 "price": 1000,
-                "period": 10,
                 "currency": "฿"
             },
-            "installment_price_text": "฿1,000",
+            "installment": {
+                "price": 222.222222222223,
+                "period": 18,
+                "currency": "฿"
+            },
             "down_payments": [20, 30, 40, 50],
             "periods": [3, 6, 9, 12, 18],
             "categorys": ["bedroom", "restroom"]
@@ -98,14 +100,17 @@ describe('Product CRUD routes tests', function () {
                         assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
                         assert.equal(resp.data.sale_price.price, mockup.sale_price.price);
                         assert.equal(resp.data.sale_price.currency, mockup.sale_price.currency);
-                        assert.equal(resp.data.sale_price_text, mockup.sale_price_text);
+                        assert.equal(resp.data.sale_price_text, "฿5,000.00");
                         assert.equal(resp.data.regular_price.price, mockup.regular_price.price);
                         assert.equal(resp.data.regular_price.currency, mockup.regular_price.currency);
-                        assert.equal(resp.data.regular_price_text, mockup.regular_price_text);
+                        assert.equal(resp.data.regular_price_text, "฿10,000.00");
                         assert.equal(resp.data.installment.price, mockup.installment.price);
                         assert.equal(resp.data.installment.period, mockup.installment.period);
                         assert.equal(resp.data.installment.currency, mockup.installment.currency);
-                        assert.equal(resp.data.installment_price_text, mockup.installment_price_text);
+                        assert.equal(resp.data.installment_price_text, "฿222.22");
+                        assert.equal(resp.data.down_payment.price, mockup.down_payment.price);
+                        assert.equal(resp.data.down_payment.currency, mockup.down_payment.currency);
+                        assert.equal(resp.data.down_payment_text, "฿1,000.00");
                         done();
                     });
             });
@@ -131,14 +136,17 @@ describe('Product CRUD routes tests', function () {
                 assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
                 assert.equal(resp.data.sale_price.price, mockup.sale_price.price);
                 assert.equal(resp.data.sale_price.currency, mockup.sale_price.currency);
-                assert.equal(resp.data.sale_price_text, mockup.sale_price_text);
+                assert.equal(resp.data.sale_price_text, "฿5,000.00");
                 assert.equal(resp.data.regular_price.price, mockup.regular_price.price);
                 assert.equal(resp.data.regular_price.currency, mockup.regular_price.currency);
-                assert.equal(resp.data.regular_price_text, mockup.regular_price_text);
+                assert.equal(resp.data.regular_price_text, "฿10,000.00");
                 assert.equal(resp.data.installment.price, mockup.installment.price);
                 assert.equal(resp.data.installment.period, mockup.installment.period);
                 assert.equal(resp.data.installment.currency, mockup.installment.currency);
-                assert.equal(resp.data.installment_price_text, mockup.installment_price_text);
+                assert.equal(resp.data.installment_price_text, "฿222.22");
+                assert.equal(resp.data.down_payment.price, mockup.down_payment.price);
+                assert.equal(resp.data.down_payment.currency, mockup.down_payment.currency);
+                assert.equal(resp.data.down_payment_text, "฿1,000.00");
                 done();
             });
     });
@@ -176,14 +184,17 @@ describe('Product CRUD routes tests', function () {
                         assert.equal(resp.data.sale_price_percentage, mockup.sale_price_percentage);
                         assert.equal(resp.data.sale_price.price, mockup.sale_price.price);
                         assert.equal(resp.data.sale_price.currency, mockup.sale_price.currency);
-                        assert.equal(resp.data.sale_price_text, mockup.sale_price_text);
+                        assert.equal(resp.data.sale_price_text, "฿5,000.00");
                         assert.equal(resp.data.regular_price.price, mockup.regular_price.price);
                         assert.equal(resp.data.regular_price.currency, mockup.regular_price.currency);
-                        assert.equal(resp.data.regular_price_text, mockup.regular_price_text);
+                        assert.equal(resp.data.regular_price_text, "฿10,000.00");
                         assert.equal(resp.data.installment.price, mockup.installment.price);
                         assert.equal(resp.data.installment.period, mockup.installment.period);
                         assert.equal(resp.data.installment.currency, mockup.installment.currency);
-                        assert.equal(resp.data.installment_price_text, mockup.installment_price_text);
+                        assert.equal(resp.data.installment_price_text, "฿222.22");
+                        assert.equal(resp.data.down_payment.price, mockup.down_payment.price);
+                        assert.equal(resp.data.down_payment.currency, mockup.down_payment.currency);
+                        assert.equal(resp.data.down_payment_text, "฿1,000.00");
                         done();
                     });
             });

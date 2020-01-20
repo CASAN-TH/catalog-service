@@ -32,6 +32,11 @@ exports.getList = function (req, res) {
 };
 
 exports.create = function (req, res) {
+    req.body.sale_price_text = req.body.sale_price.currency + req.body.sale_price.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    req.body.regular_price_text = req.body.regular_price.currency + req.body.regular_price.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    req.body.installment_price_text = req.body.installment.currency + req.body.installment.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    req.body.down_payment_text = req.body.down_payment.currency + req.body.down_payment.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
     var newProduct = new Product (req.body);
     newProduct.createby = req.user;
     newProduct.save(function (err, data) {

@@ -21,7 +21,10 @@ var ProductSchema = new Schema({
     required: "Please fill a Product name"
   },
   images: [String],
-  sale_price_percentage: String,
+  sale_price_percentage: Number,
+  sale_avaliable: {
+    type: Boolean
+  },
   sale_price: {
     type: {
       price: {
@@ -46,6 +49,19 @@ var ProductSchema = new Schema({
     }
   },
   regular_price_text: {
+    type: String
+  },
+  down_payment: {
+    type: {
+      price: {
+        type: Number
+      },
+      currency: {
+        type: String
+      }
+    }
+  },
+  down_payment_text: {
     type: String
   },
   installment: {

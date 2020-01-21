@@ -9,8 +9,15 @@ var ProductSchema = new Schema({
     enum: ["simple", "variable", "grouped", "variation", "virtual"],
     default: "simple"
   },
-  shop_id: {
-    type: String
+  shop: {
+    type: {
+      shop_id: {
+        type: String
+      },
+      shop_name: {
+        type: String
+      }
+    }
   },
   sku: {
     type: String,
@@ -80,10 +87,10 @@ var ProductSchema = new Schema({
   installment_price_text: {
     type: String
   },
-  down_payments: {
+  down_payment_lists: {
     type: [Number]
   },
-  periods: {
+  periods_lists: {
     type: [Number]
   },
   status: {

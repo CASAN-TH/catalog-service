@@ -19,7 +19,8 @@ describe('Product CRUD routes tests', function () {
             "sku": 'sku',
             "shop": {
                 "shop_id": "shop001",
-                "shop_name": "shopTest"
+                "shop_name": "shopTest",
+                "shop_image": "image.jpg"
             },
             "name": 'Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB',
             "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],

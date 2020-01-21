@@ -16,6 +16,9 @@ var ProductSchema = new Schema({
       },
       shop_name: {
         type: String
+      },
+      shop_image: {
+        type: String
       }
     }
   },

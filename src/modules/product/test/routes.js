@@ -72,6 +72,18 @@ describe('Product CRUD routes tests', function () {
             },
             "down_payment_lists": [20, 30, 40, 50],
             "periods_lists": [3, 6, 9, 12, 18],
+            "shippings": [
+                {
+                    "shipping_name": "post office Thailand",
+                    "shipping_fee": 30,
+                    "shipping_currency": "฿"
+                },
+                {
+                    "shipping_name": "kerry",
+                    "shipping_fee": 50,
+                    "shipping_currency": "฿"
+                }
+            ],
             "categorys": ["bedroom", "restroom"]
         };
         credentials = {

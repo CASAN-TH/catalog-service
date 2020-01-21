@@ -117,6 +117,21 @@ var ProductSchema = new Schema({
   periods_lists: {
     type: [Number]
   },
+  shippings: {
+    type: [
+      {
+        shipping_name: {
+          type: String
+        },
+        shipping_fee: {
+          type: Number
+        },
+        shipping_currency: {
+          type: String
+        }
+      }
+    ]
+  },
   status: {
     type: String,
     enum: ["published", "draft", "private"],

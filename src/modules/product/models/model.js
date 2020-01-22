@@ -31,26 +31,43 @@ var ProductSchema = new Schema({
     required: "Please fill a Product name"
   },
   images: [String],
-  options: {
-    type: [
-      {
-        name: {
-          type: String
-        },
-        option_lists: {
-          type: [
-            {
-              lists_name: {
-                type: String
-              },
-              lists_price: {
-                type: Number
-              }
+  options_list1: {
+    type: {
+      name: {
+        type: String
+      },
+      list_items: {
+        type: [
+          {
+            name: {
+              type: String
+            },
+            price: {
+              type: Number
             }
-          ]
-        }
+          }
+        ]
       }
-    ]
+    }
+  },
+  options_list2: {
+    type: {
+      name: {
+        type: String
+      },
+      list_items: {
+        type: [
+          {
+            name: {
+              type: String
+            },
+            price: {
+              type: Number
+            }
+          }
+        ]
+      }
+    }
   },
   sale_price_percentage: Number,
   sale_avaliable: {

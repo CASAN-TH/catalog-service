@@ -24,33 +24,32 @@ describe('Product CRUD routes tests', function () {
             },
             "name": 'Vivo v13 Pro Crystal Sky RAM 8 GB ROM 128 GB',
             "images": ["https://res.cloudinary.com/hml20oe33/image/upload/v1576751856/catalog/2_pfwgiy.jpg"],
-            "options": [
-                {
-                    "name": "color",
-                    "option_lists": [
-                        {
-                            "lists_name": "green"
-                        },
-                        {
-                            "lists_name": "yellow",
-                            "lists_price": 3000
-                        }
-                    ]
-                },
-                {
-                    "name": "size",
-                    "option_lists": [
-                        {
-                            "lists_name": "M",
-                            "lists_price": 3000
-                        },
-                        {
-                            "lists_name": "L",
-                            "lists_price": 5200
-                        }
-                    ]
-                }
-            ],
+            "options_list1": {
+                "name": "color",
+                "list_items": [
+                    {
+                        "name": "green",
+                        "price": 3000
+                    },
+                    {
+                        "name": "yellow",
+                        "price": 3000
+                    }
+                ]
+            },
+            "options_list2": {
+                "name": "size",
+                "list_items": [
+                    {
+                        "name": "M",
+                        "price": 3000
+                    },
+                    {
+                        "name": "L",
+                        "price": 3000
+                    }
+                ]
+            },
             "sale_price_percentage": 50,
             "sale_avaliable": true,
             "sale_price": {
@@ -137,6 +136,7 @@ describe('Product CRUD routes tests', function () {
                             return done(err);
                         }
                         var resp = res.body;
+                        // console.log(resp.data)
                         assert.equal(resp.status, 200);
                         assert.equal(resp.data.sku, mockup.sku);
                         assert.equal(resp.data.shop.shop_id, mockup.shop.shop_id);

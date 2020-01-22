@@ -84,6 +84,8 @@ describe('Product CRUD routes tests', function () {
                     "shipping_currency": "฿"
                 }
             ],
+            "description": "อธิบายสินค้า",
+            "description_images": ['image1.jpg','image2.jpg'],
             "categorys": ["bedroom", "restroom"]
         };
         credentials = {

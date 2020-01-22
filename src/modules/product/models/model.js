@@ -148,6 +148,7 @@ var ProductSchema = new Schema({
   },
   short_description: String,
   description: String,
+  description_images: [String],
   date_on_sale_from: String,
   date_on_sale_to: String,
   tax_status: {

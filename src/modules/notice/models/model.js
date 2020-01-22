@@ -1,0 +1,66 @@
+'use strict';
+// use model
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+
+var NoticeSchema = new Schema({
+    warranty_name: {
+        type: String
+    },
+    warranties_lists: {
+        type: [
+            {
+                title: {
+                    type: String
+                },
+                subtitle: {
+                    type: String
+                }
+            }
+        ]
+    },
+    aftersales_name: {
+        type: String
+    },
+    aftersales_lists: {
+        type: [
+            {
+                title: {
+                    type: String
+                }
+            }
+        ]
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    updated: {
+        type: Date
+    },
+    createby: {
+        _id: {
+            type: String
+        },
+        username: {
+            type: String
+        },
+        displayname: {
+            type: String
+        }
+    },
+    updateby: {
+        _id: {
+            type: String
+        },
+        username: {
+            type: String
+        },
+        displayname: {
+            type: String
+        }
+    }
+});
+
+mongoose.model("Notice", NoticeSchema);

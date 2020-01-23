@@ -30,6 +30,9 @@ var ProductSchema = new Schema({
     type: String,
     required: "Please fill a Product name"
   },
+  brand_id: {
+    type: String
+  },
   images: [String],
   options_list1: {
     type: {

@@ -354,6 +354,28 @@ describe('Product CRUD routes tests', function () {
 
     });
 
+    xit('should be product calculate payment', function (done) {
+
+        var body = {
+            "down_percentage": 20,
+            "period": 18
+        }
+
+        request(app)
+            .post('/api/productscalculate')
+            .set('Authorization', 'Bearer ' + token)
+            .send(body)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) {
+                    return done(err);
+                }
+                var resp = res.body;
+                done();
+            });
+
+    });
+
     afterEach(function (done) {
         Product.remove().exec(done);
     });

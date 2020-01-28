@@ -140,14 +140,8 @@ var ProductSchema = new Schema({
   down_payment_lists: {
     type: [Number]
   },
-  down_payment_lists_selected: {
-    type: Number
-  },
   periods_lists: {
     type: [Number]
-  },
-  periods_lists_selected: {
-    type: Number
   },
   shippings: {
     type: [

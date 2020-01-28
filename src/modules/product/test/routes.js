@@ -73,7 +73,9 @@ describe('Product CRUD routes tests', function () {
                 "currency": "฿"
             },
             "down_payment_lists": [20, 30, 40, 50],
+            "down_payment_lists_selected": 20,
             "periods_lists": [3, 6, 9, 12, 18],
+            "periods_lists_selected": 18,
             "shippings": [
                 {
                     "shipping_name": "post office Thailand",
@@ -87,7 +89,7 @@ describe('Product CRUD routes tests', function () {
                 }
             ],
             "description": "อธิบายสินค้า",
-            "description_images": ['image1.jpg','image2.jpg'],
+            "description_images": ['image1.jpg', 'image2.jpg'],
             "categorys": ["cate1_id", "cate2._id"]
         };
         credentials = {
@@ -160,6 +162,10 @@ describe('Product CRUD routes tests', function () {
                         assert.equal(resp.data.down_payment.price, mockup.down_payment.price);
                         assert.equal(resp.data.down_payment.currency, mockup.down_payment.currency);
                         assert.equal(resp.data.down_payment_text, "฿1,000.00");
+                        assert.equal(resp.data.option_default1, mockup.option_default1);
+                        assert.equal(resp.data.option_default2, mockup.option_default2);
+                        assert.equal(resp.data.down_payment_lists_selected, mockup.down_payment_lists_selected);
+                        assert.equal(resp.data.periods_lists_selected, mockup.periods_lists_selected);
                         done();
                     });
             });

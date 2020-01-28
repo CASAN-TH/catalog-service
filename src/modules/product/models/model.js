@@ -53,6 +53,9 @@ var ProductSchema = new Schema({
       }
     }
   },
+  option_default1: {
+    type: String
+  },
   options_list2: {
     type: {
       name: {
@@ -71,6 +74,9 @@ var ProductSchema = new Schema({
         ]
       }
     }
+  },
+  option_default2: {
+    type: String
   },
   sale_price_percentage: Number,
   sale_avaliable: {

@@ -38,6 +38,7 @@ describe('Product CRUD routes tests', function () {
                     }
                 ]
             },
+            "option_default1": "green",
             "options_list2": {
                 "name": "size",
                 "list_items": [
@@ -51,6 +52,7 @@ describe('Product CRUD routes tests', function () {
                     }
                 ]
             },
+            "option_default2": "M",
             "sale_price_percentage": 50,
             "sale_avaliable": true,
             "sale_price": {

@@ -39,6 +39,10 @@ app.get('/', function (req, res) {
     });
 });
 
+glob.sync(path.join(__dirname, '../modules/**/models/*.js')).forEach(function (file) {
+    require(path.resolve(file));
+});
+
 glob.sync(path.join(__dirname, '../modules/**/routes/*.js')).forEach(function (file) {
     require(path.resolve(file))(app);
 });

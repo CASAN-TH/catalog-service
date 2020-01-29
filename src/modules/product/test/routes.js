@@ -377,7 +377,7 @@ describe('Product CRUD routes tests', function () {
     });
 
     afterEach(function (done) {
-        Product.remove().exec(done);
+        Product.deleteMany().exec(done);
     });
 
 });

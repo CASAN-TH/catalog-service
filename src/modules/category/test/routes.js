@@ -331,7 +331,7 @@ describe('Category CRUD routes tests', function () {
     });
 
     afterEach(function (done) {
-        Category.remove().exec(done);
+        Category.deleteMany().exec(done);
     });
 
 });

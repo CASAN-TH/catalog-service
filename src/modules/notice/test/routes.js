@@ -264,7 +264,7 @@ describe('Notice CRUD routes tests', function () {
     });
 
     afterEach(function (done) {
-        Notice.remove().exec(done);
+        Notice.deleteMany().exec(done);
     });
 
 });

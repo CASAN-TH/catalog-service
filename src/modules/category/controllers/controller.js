@@ -1,7 +1,5 @@
 'use strict';
 var mongoose = require('mongoose'),
-    model = require('../models/model'),
-    productModel = require('../../product/models/model'),
     mq = require('../../core/controllers/rabbitmq'),
     Category = mongoose.model('Category'),
     Product = mongoose.model('Product'),
